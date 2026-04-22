@@ -5,377 +5,377 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-9.4-green)](https://www.mongodb.com/)
 [![License](https://img.shields.io/badge/License-ISC-blue)]()
 
-> Backend RESTful API para una aplicación de calendario con autenticación segura y gestión de eventos en tiempo real.
+> Robust RESTful API backend for a calendar application with secure authentication and real-time event management.
 
-## 📋 Tabla de Contenidos
+## 📋 Table of Contents
 
-- [Descripción del Proyecto](#descripción-del-proyecto)
-- [Características](#características)
-- [Stack Tecnológico](#stack-tecnológico)
-- [Arquitectura](#arquitectura)
-- [Instalación](#instalación)
-- [Configuración](#configuración)
-- [Uso](#uso)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Patrones y Buenas Prácticas](#patrones-y-buenas-prácticas)
-- [Sostenibilidad y Escalabilidad](#sostenibilidad-y-escalabilidad)
-- [Endpoints API](#endpoints-api)
-- [Contribución](#contribución)
-
----
-
-## 🎯 Descripción del Proyecto
-
-Este es un backend robusto para una **aplicación de calendario MERN** (MongoDB, Express, React, Node.js). Proporciona una API RESTful completa que permite a los usuarios:
-
-- ✅ Registrarse e iniciar sesión de forma segura
-- ✅ Crear, leer, actualizar y eliminar eventos
-- ✅ Gestionar su calendario personal
-- ✅ Autenticación basada en JWT
-- ✅ Protección de rutas y autorización por usuario
-
-El backend actúa como el **hub central** de la aplicación, proporcionando servicios de autenticación, persistencia de datos y lógica de negocio.
+- [Project Description](#project-description)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Patterns and Best Practices](#patterns-and-best-practices)
+- [Sustainability and Scalability](#sustainability-and-scalability)
+- [API Endpoints](#api-endpoints)
+- [Contributing](#contributing)
 
 ---
 
-## ✨ Características
+## 🎯 Project Description
 
-### 🔐 Autenticación y Seguridad
-- **JWT (JSON Web Tokens)** para autenticación sin estado
-- **Bcrypt** para encriptación segura de contraseñas
-- **Token refresh** automático para sesiones prolongadas
-- Validación de credenciales en cada petición
+This is a robust backend for a **MERN calendar application** (MongoDB, Express, React, Node.js). It provides a complete RESTful API that enables users to:
 
-### 📅 Gestión de Eventos
-- CRUD completo de eventos
-- Validación de datos de entrada
-- Autorización por usuario (solo editar eventos propios)
-- Relaciones entre usuarios y eventos
+- ✅ Register and login securely
+- ✅ Create, read, update, and delete events
+- ✅ Manage their personal calendar
+- ✅ JWT-based authentication
+- ✅ Route protection and user authorization
 
-### 🔄 Middleware Personalizado
-- Validación de JWT
-- Validación de campos obligatorios
-- Manejo centralizado de errores
+The backend acts as the **central hub** of the application, providing authentication services, data persistence, and business logic.
 
 ---
 
-## 🛠 Stack Tecnológico
+## ✨ Features
 
-| Tecnología | Versión | Propósito |
+### 🔐 Authentication & Security
+- **JWT (JSON Web Tokens)** for stateless authentication
+- **Bcrypt** for secure password encryption
+- **Token refresh** for extended sessions
+- Credential validation on every request
+
+### 📅 Event Management
+- Complete CRUD operations for events
+- Input data validation
+- Per-user authorization (only edit your own events)
+- User-to-event relationships
+
+### 🔄 Custom Middleware
+- JWT validation
+- Required field validation
+- Centralized error handling
+
+---
+
+## 🛠 Tech Stack
+
+| Technology | Version | Purpose |
 |-----------|---------|----------|
-| **Node.js** | 18+ | Runtime de JavaScript |
-| **Express.js** | ^5.2 | Framework web |
-| **MongoDB** | Cloud | Base de datos NoSQL |
-| **Mongoose** | ^9.4 | ODM para MongoDB |
-| **JWT** | ^9.0 | Autenticación sin estado |
-| **Bcryptjs** | ^3.0 | Encriptación de contraseñas |
-| **CORS** | ^2.8 | Control de acceso cross-origin |
-| **Dotenv** | ^17.4 | Variables de entorno |
-| **Express-validator** | ^7.3 | Validación de datos |
-| **Moment.js** | ^2.30 | Manipulación de fechas |
-| **Nodemon** | ^3.1 | Reloader en desarrollo |
+| **Node.js** | 18+ | JavaScript Runtime |
+| **Express.js** | ^5.2 | Web Framework |
+| **MongoDB** | Cloud | NoSQL Database |
+| **Mongoose** | ^9.4 | MongoDB ODM |
+| **JWT** | ^9.0 | Stateless Authentication |
+| **Bcryptjs** | ^3.0 | Password Encryption |
+| **CORS** | ^2.8 | Cross-Origin Access Control |
+| **Dotenv** | ^17.4 | Environment Variables |
+| **Express-validator** | ^7.3 | Data Validation |
+| **Moment.js** | ^2.30 | Date Manipulation |
+| **Nodemon** | ^3.1 | Development Auto-Reload |
 
 ---
 
-## 🏗 Arquitectura
+## 🏗 Architecture
 
-### Patrón MVC Adaptado
+### Adapted MVC Pattern
 
 ```
 backend/
-├── controllers/       # Lógica de negocio
-├── routes/           # Definición de endpoints
-├── middlewares/      # Validación y autenticación
-├── models/           # Esquemas de Mongoose
-├── helpers/          # Funciones utilitarias (JWT, validaciones)
-├── db/               # Configuración de base de datos
-└── index.js          # Punto de entrada
+├── controllers/       # Business logic
+├── routes/           # Endpoint definitions
+├── middlewares/      # Validation & authentication
+├── models/           # Mongoose schemas
+├── helpers/          # Utility functions (JWT, validations)
+├── db/               # Database configuration
+└── index.js          # Entry point
 ```
 
-### Flujo de una Request
+### Request Flow
 
 ```
-Cliente (Frontend)
+Client (Frontend)
     ↓
 Express Router (routes/)
     ↓
-Middleware (validaciones, JWT)
+Middleware (validations, JWT)
     ↓
-Controller (lógica de negocio)
+Controller (business logic)
     ↓
 Model (Mongoose)
     ↓
 MongoDB
     ↓
-Response JSON al Cliente
+JSON Response to Client
 ```
 
 ---
 
-## 📦 Instalación
+## 📦 Installation
 
-### Requisitos Previos
-- **Node.js** (v18 o superior)
-- **npm** o **yarn**
-- **MongoDB Atlas** (cuenta gratuita)
+### Prerequisites
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **MongoDB Atlas** (free account)
 - **Git**
 
-### Pasos
+### Steps
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
 ```bash
-git clone <tu-repo-url>
+git clone <your-repo-url>
 cd backend
 ```
 
-2. **Instalar dependencias**
+2. **Install dependencies**
 ```bash
 npm install
-# o
+# or
 yarn install
 ```
 
-3. **Configurar variables de entorno** (ver sección siguiente)
+3. **Configure environment variables** (see next section)
 
-4. **Verificar conexión**
+4. **Verify connection**
 ```bash
 npm run dev
-# Deberías ver: "Servidor corriendo en puerto 4000"
+# You should see: "Server running on port 4000"
 ```
 
 ---
 
-## ⚙️ Configuración
+## ⚙️ Configuration
 
-### Variables de Entorno (.env)
+### Environment Variables (.env)
 
-Crea un archivo `.env` en la raíz del proyecto:
+Create a `.env` file in the project root:
 
 ```env
-# Puerto del servidor
+# Server port
 PORT=4000
 
-# Conexión a MongoDB Atlas
-# Formato: mongodb+srv://usuario:contraseña@cluster.mongodb.net/nombre-bd
+# MongoDB Atlas connection
+# Format: mongodb+srv://username:password@cluster.mongodb.net/database-name
 DB_CNN=mongodb+srv://username:password@cluster.mongodb.net/calendar-db
 
-# Clave secreta para JWT (generar una fuerte en producción)
-SECRET_JWT_SEED=tu-clave-secreta-super-segura
+# Secret key for JWT (generate a strong one in production)
+SECRET_JWT_SEED=your-super-secret-key-here
 ```
 
-**⚠️ Seguridad en Producción:**
-- Usa una `SECRET_JWT_SEED` robusta y aleatoria
-- NO commits el `.env` (añadelo a `.gitignore`)
-- Usa variables de entorno en CI/CD
+**⚠️ Production Security:**
+- Use a strong, random `SECRET_JWT_SEED`
+- DO NOT commit `.env` (add it to `.gitignore`)
+- Use environment variables in CI/CD pipelines
 
 ---
 
-## 🚀 Uso
+## 🚀 Usage
 
-### Desarrollo
+### Development
 ```bash
-# Inicia el servidor con auto-reload
+# Start server with auto-reload
 npm run dev
 ```
 
-### Producción
+### Production
 ```bash
-# Inicia el servidor sin nodemon
+# Start server without nodemon
 npm start
 ```
 
-### Esperado en la consola
+### Expected Console Output
 ```
-Servidor corriendo en puerto 4000
-Conectado a la base de datos correctamente
+Server running on port 4000
+Successfully connected to database
 ```
 
 ---
 
-## 📂 Estructura del Proyecto
+## 📂 Project Structure
 
 ```
 backend/
 │
 ├── controllers/
-│   ├── auth.js           # Registro, login, renovación de token
-│   └── events.js         # CRUD de eventos
+│   ├── auth.js           # Registration, login, token renewal
+│   └── events.js         # Event CRUD operations
 │
 ├── routes/
 │   ├── auth.js           # Endpoints: /api/auth/*
 │   └── events.js         # Endpoints: /api/events/*
 │
 ├── middlewares/
-│   ├── validar-jwt.js    # Verifica y decodifica JWT
-│   └── validar-campos.js # Valida datos de entrada
+│   ├── validar-jwt.js    # JWT verification & decoding
+│   └── validar-campos.js # Input data validation
 │
 ├── models/
-│   ├── Usuario.js        # Schema para usuarios
-│   └── Evento.js         # Schema para eventos
+│   ├── Usuario.js        # User schema
+│   └── Evento.js         # Event schema
 │
 ├── helpers/
-│   ├── jwt.js            # Funciones de generación de JWT
-│   └── isDate.js         # Validación de fechas
+│   ├── jwt.js            # JWT generation functions
+│   └── isDate.js         # Date validation
 │
 ├── db/
-│   └── config.js         # Conexión a MongoDB
+│   └── config.js         # MongoDB connection
 │
-├── .env                  # Variables de entorno (NO committed)
-├── index.js              # Punto de entrada principal
-├── package.json          # Dependencias y scripts
-└── README.md             # Este archivo
+├── .env                  # Environment variables (NOT committed)
+├── index.js              # Main entry point
+├── package.json          # Dependencies & scripts
+└── README.md             # This file
 ```
 
-### Archivos Clave
+### Key Files
 
-**`index.js`** - Punto de entrada
-- Configuración de Express
-- Conexión a BD
-- CORS habilitado
-- Definición de rutas principales
+**`index.js`** - Entry Point
+- Express configuration
+- Database connection
+- CORS enabled
+- Main route definitions
 
-**`controllers/auth.js`** - Autenticación
-- `crearUsuario()` - Registro de nuevo usuario
-- `loginUsuario()` - Autenticación
-- `revalidarToken()` - Renovar JWT expirado
+**`controllers/auth.js`** - Authentication
+- `crearUsuario()` - User registration
+- `loginUsuario()` - User login
+- `revalidarToken()` - JWT token renewal
 
-**`controllers/events.js`** - Gestión de eventos
-- `getEventos()` - Obtener todos los eventos
-- `crearEvento()` - Crear nuevo evento
-- `actualizarEvento()` - Editar evento
-- `eliminarEvento()` - Eliminar evento
+**`controllers/events.js`** - Event Management
+- `getEventos()` - Fetch all events
+- `crearEvento()` - Create new event
+- `actualizarEvento()` - Update event
+- `eliminarEvento()` - Delete event
 
 ---
 
-## 🎓 Patrones y Buenas Prácticas
+## 🎓 Patterns and Best Practices
 
-### 1. **Autenticación JWT sin Estado**
+### 1. **Stateless JWT Authentication**
 ```javascript
-// Genera un token con información del usuario
+// Generate token with user information
 const token = await generarJWT(uid, name);
 
-// El middleware verifica sin consultar la BD cada vez
+// Middleware verifies without querying database each time
 const {uid, name} = jwt.verify(token, SECRET_JWT_SEED);
 ```
 
-**Beneficio:** Escalabilidad - no requiere sesiones en servidor.
+**Benefit:** Scalability - no server-side sessions required.
 
-### 2. **Middleware Encadenado**
+### 2. **Chained Middleware**
 ```javascript
 router.get('/renew',
-    validarJWT,        // 1. Valida token
-    revalidarToken     // 2. Genera nuevo token
+    validarJWT,        // 1. Validates token
+    revalidarToken     // 2. Generates new token
 );
 ```
 
-**Beneficio:** Separación de responsabilidades, reutilización.
+**Benefit:** Separation of concerns, reusability.
 
-### 3. **Validación en Capas**
+### 3. **Layered Validation**
 ```javascript
 router.post('/new',
     [
         check('name').not().isEmpty(),
         check('email').isEmail(),
         check('password').isLength({min:6}),
-        validarCampos  // Ejecuta validaciones
+        validarCampos  // Executes validations
     ],
     crearUsuario
 );
 ```
 
-**Beneficio:** Validación expresiva, errores claros.
+**Benefit:** Expressive validation, clear error messages.
 
-### 4. **Control de Autorización**
+### 4. **Authorization Control**
 ```javascript
-// Solo el propietario puede editar su evento
+// Only owner can edit their event
 if(evento.user.toString() !== uid) {
-    return res.status(401).json({msg: 'No autorizado'});
+    return res.status(401).json({msg: 'Not authorized'});
 }
 ```
 
-**Beneficio:** Protección de datos, privacidad.
+**Benefit:** Data protection, privacy.
 
-### 5. **Separación de Responsabilidades**
-- **Controllers:** Lógica de negocio
-- **Routes:** Definición de endpoints
-- **Middlewares:** Validación y autenticación
-- **Models:** Esquemas de datos
-- **Helpers:** Funciones reutilizables
+### 5. **Separation of Concerns**
+- **Controllers:** Business logic
+- **Routes:** Endpoint definitions
+- **Middlewares:** Validation & authentication
+- **Models:** Data schemas
+- **Helpers:** Reusable functions
 
 ---
 
-## 📈 Sostenibilidad y Escalabilidad
+## 📈 Sustainability and Scalability
 
-### Sostenibilidad
+### Sustainability
 
-✅ **Código Mantenible**
-- Estructura clara y modular
-- Nombres descriptivos
-- Separación de concerns
+✅ **Maintainable Code**
+- Clear, modular structure
+- Descriptive naming
+- Separation of concerns
 
-✅ **Documentación**
-- README completo
-- Comentarios en código crítico
-- Estructura clara de carpetas
+✅ **Documentation**
+- Complete README
+- Critical code comments
+- Clear folder structure
 
-✅ **Dependencias Actualizadas**
-- Versiones estables
-- Dependencias mínimas
-- Licencia clara (ISC)
+✅ **Updated Dependencies**
+- Stable versions
+- Minimal dependencies
+- Clear license (ISC)
 
-### Escalabilidad
+### Scalability
 
 📊 **Horizontal:**
-- JWT sin estado (sin sesiones en servidor)
-- Stateless - múltiples instancias posibles
-- Compatible con load balancers
+- Stateless JWT (no server sessions)
+- Multiple instances possible
+- Load balancer compatible
 
 📊 **Vertical:**
-- MongoDB Atlas (escalable automáticamente)
-- Mongoose con índices optimizados
-- Relaciones `populate` eficientes
+- MongoDB Atlas (auto-scaling)
+- Mongoose with optimized indexes
+- Efficient `populate` relationships
 
-📊 **Mejoras Futuras:**
+📊 **Future Improvements:**
 ```
-- Rate limiting para prevenir abuso
-- Caché con Redis
-- Paginación de eventos
-- Búsqueda y filtrado avanzado
-- Webhooks para notificaciones
-- Logging centralizado (Winston, Bunyan)
+- Rate limiting to prevent abuse
+- Redis caching
+- Event pagination
+- Advanced search & filtering
+- Webhooks for notifications
+- Centralized logging (Winston, Bunyan)
 - Testing (Jest, Supertest)
 ```
 
 ---
 
-## 🔌 Endpoints API
+## 🔌 API Endpoints
 
-### Autenticación (`/api/auth`)
+### Authentication (`/api/auth`)
 
-| Método | Endpoint | Descripción | Auth |
+| Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
-| **POST** | `/new` | Registrar nuevo usuario | ❌ |
-| **POST** | `/` | Iniciar sesión | ❌ |
-| **GET** | `/renew` | Renovar JWT expirado | ✅ |
+| **POST** | `/new` | Register new user | ❌ |
+| **POST** | `/` | User login | ❌ |
+| **GET** | `/renew` | Renew expired JWT | ✅ |
 
-### Eventos (`/api/events`)
+### Events (`/api/events`)
 
-| Método | Endpoint | Descripción | Auth |
+| Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
-| **GET** | `/` | Obtener todos los eventos | ✅ |
-| **POST** | `/` | Crear nuevo evento | ✅ |
-| **PUT** | `/:id` | Actualizar evento | ✅ |
-| **DELETE** | `/:id` | Eliminar evento | ✅ |
+| **GET** | `/` | Fetch all events | ✅ |
+| **POST** | `/` | Create new event | ✅ |
+| **PUT** | `/:id` | Update event | ✅ |
+| **DELETE** | `/:id` | Delete event | ✅ |
 
-#### Ejemplo Request - Registro
+#### Example Request - Registration
 
 ```bash
 POST /api/auth/new
 Content-Type: application/json
 
 {
-  "name": "Juan Pérez",
-  "email": "juan@example.com",
+  "name": "John Doe",
+  "email": "john@example.com",
   "password": "123456"
 }
 ```
@@ -385,84 +385,90 @@ Content-Type: application/json
 {
   "ok": true,
   "uid": "507f1f77bcf86cd799439011",
-  "name": "Juan Pérez",
+  "name": "John Doe",
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
-#### Ejemplo Request - Crear Evento
+#### Example Request - Create Event
 
 ```bash
-GET /api/events
+POST /api/events
 Headers:
   x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+{
+  "title": "Team Meeting",
+  "notes": "Discuss Q2 roadmap",
+  "start": "2024-12-15T10:00:00Z",
+  "end": "2024-12-15T11:00:00Z"
+}
 ```
 
 ---
 
-## 🌐 Integración Frontend
+## 🌐 Frontend Integration
 
-Este backend está diseñado para trabajar con un **frontend React**. El frontend:
+This backend is designed to work with a **React frontend**. The frontend:
 
-1. **Realiza login** → Recibe JWT
-2. **Almacena token** en localStorage
-3. **Envía token** en header `x-token` en cada request
-4. **Renueva token** automáticamente cuando expira
-5. **Gestiona calendario** con eventos sincronizados
+1. **Performs login** → Receives JWT
+2. **Stores token** in localStorage
+3. **Sends token** in `x-token` header on every request
+4. **Auto-renews token** when expired
+5. **Manages calendar** with synchronized events
 
-### Headers Esperados
+### Expected Headers
 
 ```javascript
-// Cada request al backend debe incluir:
+// Every backend request must include:
 {
-  'x-token': 'jwt-token-aqui',
+  'x-token': 'your-jwt-token-here',
   'Content-Type': 'application/json'
 }
 ```
 
 ---
 
-## 🤝 Contribución
+## 🤝 Contributing
 
-Las contribuciones son bienvenidas. Para cambios significativos:
+Contributions are welcome! For significant changes:
 
-1. Fork el repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/nombre`)
-3. Commit cambios (`git commit -am 'Agrega feature'`)
-4. Push a la rama (`git push origin feature/nombre`)
-5. Abre un Pull Request
-
----
-
-## 📝 Notas Adicionales
-
-### Seguridad
-- Las contraseñas se encriptan con **bcrypt** (salt rounds: 10)
-- Tokens JWT expiran en **2 horas**
-- CORS está habilitado para desarrollo (ajustar en producción)
-
-### Base de Datos
-- MongoDB Atlas con autenticación
-- Esquemas validados con Mongoose
-- Índices únicos en email de usuarios
-
-### Desarrollo
-- Usa `npm run dev` para auto-reload con nodemon
-- Todos los logs se imprimen en consola
-- Variables de entorno requeridas para iniciar
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit changes (`git commit -am 'Add feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
 
 ---
 
-## 📄 Licencia
+## 📝 Additional Notes
 
-Este proyecto está bajo licencia **ISC**.
+### Security
+- Passwords are encrypted with **bcrypt** (salt rounds: 10)
+- JWT tokens expire in **2 hours**
+- CORS enabled for development (adjust for production)
+
+### Database
+- MongoDB Atlas with authentication
+- Mongoose-validated schemas
+- Unique indexes on user emails
+
+### Development
+- Use `npm run dev` for auto-reload with nodemon
+- All logs printed to console
+- Environment variables required to start
 
 ---
 
-## 👤 Autor
+## 📄 License
 
-Desarrollado como parte del curso **React Zero to Expert**
+This project is licensed under the **ISC** License.
 
 ---
 
-**⭐ Si encontraste útil este proyecto, dale una star! ⭐**
+## 👤 Author
+
+**Fredy Velasquez**
+
+
